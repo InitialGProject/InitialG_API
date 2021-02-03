@@ -2,15 +2,16 @@
 
 namespace app\controllers;
 
-use yii\rest\ActiveController;
 // use yii\filters\auth\HttpBearerAuth;
+use yii\filters\Cors;
 
 /**
  * NoticiasController implements the CRUD actions for Noticias model.
  */
-class NoticiasController extends ActiveController
+class NoticiasController extends \yii\rest\ActiveController
 {
-   /* public function behaviors()
+    /* Autentificación de user para acceder a los datos
+    public function behaviors()
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
@@ -19,6 +20,23 @@ class NoticiasController extends ActiveController
         ];
         return $behaviors;
     }*/
+
+    // "Solución de CORS cuando lo subamos al server"
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        $behaviors['corsFilter'] = [
+            'class' => Cors::className(),
+            'cors' => [
+                'Acces-Control-Allow-Origin' => ['*'],
+                'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+                'Access-Control-Request-Headers' => ['*'],
+                'Access-Control-Allow-Credentials' => true,
+            ],
+        ];
+        return $behaviors;
+    }
 
     public $modelClass = 'app\models\Noticias';
 }
