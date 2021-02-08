@@ -116,8 +116,13 @@ class Torneos extends \yii\db\ActiveRecord
         }
     }
 
+    public function getCategoriaDesc()
+    {
+        return $this->categorias->categoria;
+    }
+
     public function fields()
     {
-        return array_merge(parent::fields(), ['contenido']);
+        return array_merge(parent::fields(), ['contenido','CategoriaDesc']);
     }
 }
