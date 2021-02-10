@@ -66,6 +66,11 @@ class Noticias extends \yii\db\ActiveRecord
         return $this->hasOne(Usuarios::className(), ['id' => 'autor_id']);
     }
 
+    public function getNombre()
+    {
+        return $this->autor->nombre;
+    }
+
     /**
      * Gets query for [[Entradas]].
      *
@@ -74,5 +79,10 @@ class Noticias extends \yii\db\ActiveRecord
     public function getEntradas()
     {
         return $this->hasOne(Entradas::className(), ['id' => 'entradas_id']);
+    }
+
+    public function fields()
+    {
+        return array_merge(parent::fields(), ['nombre']);
     }
 }
