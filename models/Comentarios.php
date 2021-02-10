@@ -78,18 +78,13 @@ class Comentarios extends \yii\db\ActiveRecord
         return $this->hasOne(Usuarios::className(), ['id' => 'usuario_id']);
     }
 
-    public function getTitulo()
+    public function getNombre()
     {
-        return $this->entradas->titulo;
-    }
-
-    public function getCategoriaDesc()
-    {
-        return $this->entradas->categorias->categoria;
+        return $this->usuario->nombre;
     }
 
     public function fields()
     {
-        return array_merge(parent::fields(), ['Titulo','CategoriaDesc']);
+        return array_merge(parent::fields(), ['Nombre']);
     }
 }

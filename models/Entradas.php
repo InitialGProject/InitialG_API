@@ -127,4 +127,14 @@ class Entradas extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Torneos::className(), ['entrada_id' => 'id']);
     }
+
+    public function getCategoriaDesc()
+    {
+        return $this->categorias->categoria;
+    }
+
+    public function fields()
+    {
+        return array_merge(parent::fields(), ['CategoriaDesc']);
+    }
 }
