@@ -10,7 +10,8 @@ return  [
             'participantestorneos',
             'juegos',
             'entradas',
-            'comentarios'
+            'comentarios',
+            'categorias'
         ],
     ],
     [
