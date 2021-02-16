@@ -38,14 +38,15 @@ class Torneos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['categorias_id', 'usuario_id', 'titulo', 'imagen', 'descripcion', 'fechaInicio', 'fechaFin', 'entrada_id'], 'required'],
-            [['categorias_id', 'usuario_id', 'entrada_id'], 'integer'],
-            [['imagen', 'descripcion'], 'string'],
+            [['categorias_id', 'usuario_id', 'titulo', 'imagen', 'descripcion', 'fechaInicio', 'fechaFin', 'entrada_id', 'estado', 'participantes_id'], 'required'],
+            [['categorias_id', 'usuario_id', 'entrada_id', 'participantes_id'], 'integer'],
+            [['imagen', 'descripcion', 'estado'], 'string'],
             [['fechaInicio', 'fechaFin'], 'safe'],
             [['titulo'], 'string', 'max' => 50],
             [['categorias_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categorias::className(), 'targetAttribute' => ['categorias_id' => 'id']],
             [['entrada_id'], 'exist', 'skipOnError' => true, 'targetClass' => Entradas::className(), 'targetAttribute' => ['entrada_id' => 'id']],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
+            [['participantes_id'], 'exist', 'skipOnError' => true, 'targetClass' => Participantestorneos::className(), 'targetAttribute' => ['participantes_id' => 'id']],
         ];
     }
 
@@ -61,9 +62,11 @@ class Torneos extends \yii\db\ActiveRecord
             'titulo' => Yii::t('app', 'Titulo'),
             'imagen' => Yii::t('app', 'Imagen'),
             'descripcion' => Yii::t('app', 'Descripcion'),
+            'estado' => Yii::t('app', 'Estado'),
             'fechaInicio' => Yii::t('app', 'Fecha Inicio'),
             'fechaFin' => Yii::t('app', 'Fecha Fin'),
             'entrada_id' => Yii::t('app', 'Entrada ID'),
+            'participantes_id' => Yii::t('app', 'Participantes ID'),
         ];
     }
 
@@ -97,6 +100,16 @@ class Torneos extends \yii\db\ActiveRecord
         return $this->hasOne(Usuarios::className(), ['id' => 'usuario_id']);
     }
 
+    /**
+     * Gets query for [[Participantes]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getParticipantes()
+    {
+        return $this->hasOne(Participantestorneos::className(), ['id' => 'participantes_id']);
+    }
+
     public function getEstado()
     {
         $estado = $this->entrada->estado;
@@ -125,8 +138,32 @@ class Torneos extends \yii\db\ActiveRecord
         }
     }
 
+    public function getEstadoTorneo()
+    {
+        $estado = $this->estado;
+
+        if ($estado == 'C') {
+            $estado = 'En Curso';
+        } else {
+            $estado = 'Finalizado';
+        }
+
+        return $estado;
+    }
+
+    public function getNumparticipantes()
+    {
+        $estado = $this->estado;
+
+        if ($this->getEstadoTorneo() == 'En Curso') {
+            return $this->participantes->numeroParticipantes;
+        } else {
+            return '-';
+        }
+    }
+
     public function fields()
     {
-        return array_merge(parent::fields(), ['estado', 'contenido', 'CategoriaDesc']);
+        return array_merge(parent::fields(), ['estado', 'contenido', 'CategoriaDesc', 'estadoTorneo', 'numparticipantes']);
     }
 }
