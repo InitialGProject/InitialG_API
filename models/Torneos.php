@@ -103,6 +103,8 @@ class Torneos extends \yii\db\ActiveRecord
 
         if ($estado == 'A') {
             $estado = 'Aceptado';
+        } else {
+            $estado = 'Denegado';
         }
 
         return $estado;
@@ -118,11 +120,13 @@ class Torneos extends \yii\db\ActiveRecord
 
     public function getCategoriaDesc()
     {
-        return $this->categorias->categoria;
+        if ($this->getEstado() == 'Aceptado') {
+            return $this->categorias->categoria;
+        }
     }
 
     public function fields()
     {
-        return array_merge(parent::fields(), ['contenido','CategoriaDesc']);
+        return array_merge(parent::fields(), ['estado', 'contenido', 'CategoriaDesc']);
     }
 }

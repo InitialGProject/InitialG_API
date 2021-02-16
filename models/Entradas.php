@@ -128,13 +128,28 @@ class Entradas extends \yii\db\ActiveRecord
         return $this->hasMany(Torneos::className(), ['entrada_id' => 'id']);
     }
 
+    public function getEstado()
+    {
+        $estado = $this->estado;
+
+        if ($estado == 'A') {
+            $estado = 'Aceptado';
+        } else {
+            $estado = 'Denegado';
+        }
+
+        return $estado;
+    }
+
     public function getCategoriaDesc()
     {
-        return $this->categorias->categoria;
+        if ($this->getEstado() == 'Aceptado') {
+            return $this->categorias->categoria;
+        }
     }
 
     public function fields()
     {
-        return array_merge(parent::fields(), ['CategoriaDesc']);
+        return array_merge(parent::fields(), ['Estado', 'CategoriaDesc']);
     }
 }

@@ -78,13 +78,28 @@ class Comentarios extends \yii\db\ActiveRecord
         return $this->hasOne(Usuarios::className(), ['id' => 'usuario_id']);
     }
 
+    public function getEstado()
+    {
+        $estado = $this->entradas->estado;
+
+        if ($estado == 'A') {
+            $estado = 'Aceptado';
+        } else {
+            $estado = 'Denegado';
+        }
+
+        return $estado;
+    }
+
     public function getNombre()
     {
-        return $this->usuario->nombre;
+        if ($this->getEstado() == 'Aceptado') {
+            return $this->usuario->nombre;
+        }
     }
 
     public function fields()
     {
-        return array_merge(parent::fields(), ['Nombre']);
+        return array_merge(parent::fields(), ['Estado', 'Nombre']);
     }
 }
