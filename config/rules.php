@@ -7,6 +7,7 @@ return  [
             'noticias',
             'usuarios',
             'torneos',
+            'videos',
             'participantestorneos',
             'juegos',
             'entradas',
