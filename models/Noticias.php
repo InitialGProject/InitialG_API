@@ -91,9 +91,13 @@ class Noticias extends \yii\db\ActiveRecord
 
     public function getNombre()
     {
+        $mostrado = $this->autor->nombre;
         if ($this->getEstado() == 'Aceptado') {
-            return $this->autor->nombre;
+            $mostrado;
+        } else {
+            $mostrado = "Undefined";
         }
+        return $mostrado;
     }
 
     public function fields()
