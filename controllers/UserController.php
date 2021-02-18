@@ -10,10 +10,10 @@ class UserController extends \yii\rest\ActiveController
     public function actionAuthenticate()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
             // Si se envían los datos en formato raw dentro de la petición http, se recogen así:
-
             $params = json_decode(file_get_contents("php://input"), false);
-            @$usuario = $params->usuario;
+            @$usuario = $params->nombre;
             @$password = $params->password;
 
             // Si se envían los datos de la forma habitual (form-data), se reciben en $_POST:
