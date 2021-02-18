@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-// use yii\filters\auth\HttpBearerAuth;
+use yii\filters\auth\HttpBearerAuth;
 use yii\filters\Cors;
 
 /**
@@ -10,22 +10,19 @@ use yii\filters\Cors;
  */
 class NoticiasController extends \yii\rest\ActiveController
 {
-    /* Autentificación de user para acceder a los datos
+
+    // Solución de CORS y auth para cuando lo subamos al server
     public function behaviors()
     {
         $behaviors = parent::behaviors();
+
+        // Autentificación de user para acceder a los datos
         $behaviors['authenticator'] = [
             'class' => HttpBearerAuth::className(),
             'except' => ['options', 'authenticate'],
         ];
-        return $behaviors;
-    }*/
 
-    // "Solución de CORS cuando lo subamos al server"
-    public function behaviors()
-    {
-        $behaviors = parent::behaviors();
-
+        // CORS
         $behaviors['corsFilter'] = [
             'class' => Cors::className(),
             'cors' => [

@@ -27,7 +27,7 @@ use Yii;
  */
 class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
-     /**
+    /**
      * {@inheritdoc}
      */
     public static function findIdentity($id)
@@ -38,9 +38,9 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     /**
      * {@inheritdoc}
      */
-    public static function findIdentityByAccessToken($token, $type = null) {
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
         return self::findOne(['token' => $token]);
-
     }
 
     /**
@@ -49,7 +49,8 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
      * @param string $username
      * @return static|null
      */
-    public static function findByUsername($username) {
+    public static function findByUsername($username)
+    {
         return static::findOne(['usuario' => $username]);
     }
 
@@ -85,7 +86,7 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        return $this->password === md5($password);
     }
 
     /**

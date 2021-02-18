@@ -2,12 +2,11 @@
 
 namespace app\controllers;
 
-use yii\rest\Controller;
+use yii\filters\Cors;
 
-class UserController extends Controller
+class UserController extends \yii\rest\ActiveController
 {
-    public $modelClass = 'app\models\Usuarios';
-
+    // Función de auth
     public function actionAuthenticate()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -18,10 +17,10 @@ class UserController extends Controller
             @$password = $params->password;
 
             // Si se envían los datos de la forma habitual (form-data), se reciben en $_POST:
-            // $usuario = $_POST['usuario'];
+            // $usuario = $_POST['nombre'];
             // $password = $_POST['password'];
 
-            if ($u = \app\models\Usuarios::findOne(['usuario' => $usuario]))
+            if ($u = \app\models\Usuarios::findOne(['nombre' => $usuario]))
                 if ($u->password == md5($password)) { //o crypt, según esté en la BD
 
                     return ['token' => $u->token, 'id' => $u->id, 'nombre' => $u->nombre];
@@ -30,4 +29,23 @@ class UserController extends Controller
             return ['error' => 'Usuario incorrecto. ' . $usuario];
         }
     }
+
+    // Solución de CORS para cuando lo subamos al server
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        $behaviors['corsFilter'] = [
+            'class' => Cors::className(),
+            'cors' => [
+                'Acces-Control-Allow-Origin' => ['*'],
+                'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+                'Access-Control-Request-Headers' => ['*'],
+                'Access-Control-Allow-Credentials' => true,
+            ],
+        ];
+        return $behaviors;
+    }
+
+    public $modelClass = 'app\models\Usuarios';
 }
