@@ -17,7 +17,7 @@ return  [
     ],
     [
         'class' => 'yii\rest\UrlRule',
-        'controller' => ['user'],
+        'controller' => ['user', 'noticias'],
         'pluralize' => false,
         'extraPatterns' => [
             'POST authenticate' => 'authenticate',

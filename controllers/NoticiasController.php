@@ -10,6 +10,28 @@ use yii\filters\Cors;
  */
 class NoticiasController extends \yii\rest\ActiveController
 {
+    public function actionAuthenticate()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
+            // Si se envían los datos en formato raw dentro de la petición http, se recogen así:
+            $params = json_decode(file_get_contents("php://input"), false);
+            @$usuario = $params->nombre;
+            @$password = $params->password;
+
+            // Si se envían los datos de la forma habitual (form-data), se reciben en $_POST:
+            // $usuario = $_POST['nombre'];
+            // $password = $_POST['password'];
+
+            if ($u = \app\models\Usuarios::findOne(['nombre' => $usuario]))
+                if ($u->password == md5($password)) { //o crypt, según esté en la BD
+
+                    return ['token' => $u->token, 'id' => $u->id, 'nombre' => $u->nombre];
+                }
+
+            return ['error' => 'Usuario incorrecto. ' . $usuario];
+        }
+    }
 
     // Solución de CORS y auth para cuando lo subamos al server
     public function behaviors()
