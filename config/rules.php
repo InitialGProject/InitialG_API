@@ -17,12 +17,11 @@ return  [
     ],
     [
         'class' => 'yii\rest\UrlRule',
-        'controller' => ['user', 'noticias'],
+        'controller' => ['user'],
         'pluralize' => false,
         'extraPatterns' => [
             'POST authenticate' => 'authenticate',
             'OPTIONS authenticate' => 'authenticate',
         ]
     ],
-
 ];
