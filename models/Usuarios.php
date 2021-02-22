@@ -27,6 +27,8 @@ use Yii;
  */
 class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
+    public $username;
+
     /**
      * {@inheritdoc}
      */
@@ -51,7 +53,7 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
      */
     public static function findByUsername($username)
     {
-        return static::findOne(['usuario' => $username]);
+        return static::findOne(['nombre' => $username]);
     }
 
     /**
