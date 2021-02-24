@@ -23,7 +23,7 @@ class UserController extends \yii\rest\ActiveController
             if ($u = \app\models\Usuarios::findOne(['nombre' => $usuario]))
                 if ($u->password == md5($password)) { //o crypt, según esté en la BD
 
-                    return ['token' => $u->token, 'id' => $u->id, 'nombre' => $u->nombre];
+                    return ['token' => $u->token, 'id' => $u->id, 'nombre' => $u->nombre, 'suscripcion' => $u->getTipoUser(), 'avatar' => $u->avatar];
                 }
 
             return ['error' => 'Usuario incorrecto. ' . $usuario];
