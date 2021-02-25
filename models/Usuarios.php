@@ -105,11 +105,12 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     public function rules()
     {
         return [
-            [['nombre', 'correo', 'edad', 'password', 'tipo', 'avatar'], 'required'],
+            [['nombre', 'correo', 'password', 'token'], 'required'],
             [['correo', 'avatar'], 'string'],
-            [['edad', 'tipo', 'suscripcion'], 'integer'],
+            [['edad', 'suscripcion'], 'integer'],
             [['nombre'], 'string', 'max' => 50],
-            [['password'], 'string', 'max' => 10],
+            [['password'], 'string', 'max' => 32],
+            [['token'], 'string', 'max' => 32],
             [['genero', 'estado'], 'string', 'max' => 1],
         ];
     }
@@ -125,7 +126,6 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
             'correo' => Yii::t('app', 'Correo'),
             'edad' => Yii::t('app', 'Edad'),
             'password' => Yii::t('app', 'Password'),
-            'tipo' => Yii::t('app', 'Tipo'),
             'genero' => Yii::t('app', 'Genero'),
             'estado' => Yii::t('app', 'Estado'),
             'suscripcion' => Yii::t('app', 'Suscripcion'),

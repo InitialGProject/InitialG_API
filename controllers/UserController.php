@@ -15,18 +15,18 @@ class UserController extends \yii\rest\ActiveController
             $params = json_decode(file_get_contents("php://input"), false);
             @$usuario = $params->nombre;
             @$password = $params->password;
-
             // Si se envían los datos de la forma habitual (form-data), se reciben en $_POST:
             // $usuario = $_POST['nombre'];
             // $password = $_POST['password'];
 
             if ($u = \app\models\Usuarios::findOne(['nombre' => $usuario]))
-                if ($u->password == md5($password)) { //o crypt, según esté en la BD
+                if ($u->password == md5($password)&&$u->estado!='P'&&$u->estado!='D') { //o crypt, según esté en la BD
 
                     return ['token' => $u->token, 'id' => $u->id, 'nombre' => $u->nombre, 'suscripcion' => $u->getTipoUser(), 'avatar' => $u->avatar];
-                }
-
-            return ['error' => 'Usuario incorrecto. ' . $usuario];
+                }else{
+                
+            return ['error' => 'Usuario incorrecto o no validado. ' . $usuario];
+            }
         }
     }
 
