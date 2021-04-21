@@ -51,14 +51,6 @@ $config = [
             'rules' => require(__DIR__ . '/rules.php')
         ],
         'db' => $db,
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        */
     ],
     'params' => $params,
 ];

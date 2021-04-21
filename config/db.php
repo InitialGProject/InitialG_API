@@ -2,7 +2,10 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=alum3.iesfsl.org;dbname=initialg',
+    //Local
+    //'dsn' => 'mysql:host=alum3.iesfsl.org;dbname=initialg',
+    //Servidor
+    'dsn' => 'mysql:host=localhost;dbname=initialg',
     'username' => 'rooto',
     'password' => 'madj',
     'charset' => 'utf8',

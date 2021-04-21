@@ -12,7 +12,9 @@ return  [
             'juegos',
             'entradas',
             'comentarios',
-            'categorias'
+            'categorias',
+            'productoscategoria',
+            'productos'
         ],
     ],
     [
