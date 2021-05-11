@@ -14,7 +14,9 @@ return  [
             'comentarios',
             'categorias',
             'productoscategoria',
-            'productos'
+            'productos',
+            'productosfacturacion',
+            'productosfactura'
         ],
     ],
     [

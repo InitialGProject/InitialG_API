@@ -12,7 +12,7 @@ use Yii;
  * @property string $fecha_compra
  * @property int $enviado
  * @property string|null $fecha_envio
- * @property int|null $total
+ * @property float|null $total
  *
  * @property ProductosFactura[] $productosFacturas
  * @property Usuarios $usuario
@@ -34,8 +34,9 @@ class ProductosFacturacion extends \yii\db\ActiveRecord
     {
         return [
             [['id_usuario', 'fecha_compra'], 'required'],
-            [['id_usuario', 'enviado', 'total'], 'integer'],
+            [['id_usuario', 'enviado'], 'integer'],
             [['fecha_compra', 'fecha_envio'], 'safe'],
+            [['total'], 'number'],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['id_usuario' => 'id']],
         ];
     }
