@@ -33,7 +33,7 @@ class ProductosFacturacion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_usuario', 'fecha_compra'], 'required'],
+            [['id_usuario','total'], 'required'],
             [['id_usuario', 'enviado'], 'integer'],
             [['fecha_compra', 'fecha_envio'], 'safe'],
             [['total'], 'number'],
