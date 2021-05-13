@@ -7,7 +7,7 @@ use yii\filters\Cors;
 /**
  * ProductosCategoriaController implements the CRUD actions for ProductosCategoria model.
  */
-class ProductosfacturaController extends ApiController
+class ProductosfacturaController extends \yii\rest\ActiveController
 {
     public $authenable = false;  // En autenticación no chequea el Bearer
 
@@ -17,7 +17,7 @@ class ProductosfacturaController extends ApiController
         $behaviors = parent::behaviors();
 
         $behaviors['corsFilter'] = [
-            'class' => Cors::className(),
+            'class' => Cors::class,
             'cors' => [
                 'Acces-Control-Allow-Origin' => ['*'],
                 'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
@@ -29,4 +29,12 @@ class ProductosfacturaController extends ApiController
     }
 
     public $modelClass = 'app\models\Productosfactura';
+
+    // Función de auth
+    public function actionTest()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            return "ok";
+        }
+    }
 }
