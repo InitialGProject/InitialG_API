@@ -32,8 +32,8 @@ class ProductosFactura extends \yii\db\ActiveRecord
         return [
             [['id_facturacion', 'id_producto', 'cantidad'], 'required'],
             [['id_facturacion', 'id_producto', 'cantidad'], 'integer'],
-            [['id_facturacion'], 'exist', 'skipOnError' => true, 'targetClass' => ProductosFacturacion::className(), 'targetAttribute' => ['id_facturacion' => 'id']],
-            [['id_producto'], 'exist', 'skipOnError' => true, 'targetClass' => Productos::className(), 'targetAttribute' => ['id_producto' => 'id']],
+            [['id_facturacion'], 'exist', 'skipOnError' => true, 'targetClass' => ProductosFacturacion::class, 'targetAttribute' => ['id_facturacion' => 'id']],
+            [['id_producto'], 'exist', 'skipOnError' => true, 'targetClass' => Productos::class, 'targetAttribute' => ['id_producto' => 'id']],
         ];
     }
 
@@ -56,7 +56,7 @@ class ProductosFactura extends \yii\db\ActiveRecord
      */
     public function getFacturacion()
     {
-        return $this->hasOne(ProductosFacturacion::className(), ['id' => 'id_facturacion']);
+        return $this->hasOne(ProductosFacturacion::class, ['id' => 'id_facturacion']);
     }
 
     /**
@@ -66,6 +66,6 @@ class ProductosFactura extends \yii\db\ActiveRecord
      */
     public function getProducto()
     {
-        return $this->hasOne(Productos::className(), ['id' => 'id_producto']);
+        return $this->hasOne(Productos::class, ['id' => 'id_producto']);
     }
 }
