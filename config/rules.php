@@ -14,7 +14,11 @@ return  [
             'comentarios',
             'categorias',
             'productoscategoria',
-            'productos'
+            'productos',
+            'chat',
+            'chatuser',
+            'useruser',
+            'mensaje',
         ],
     ],
     [
