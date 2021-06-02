@@ -10,12 +10,13 @@ use Yii;
  * @property int $id
  * @property int $cat_id
  * @property string $nombre
- * @property int $precio
+ * @property float $precio
  * @property int $IVA
  * @property string $imagen
  * @property string $descripcion
  * @property int $stock
  * @property int $disponible
+ * @property int $estado
  *
  * @property ProductosCategoria $cat
  * @property ProductosFactura[] $productosFacturas
@@ -37,9 +38,10 @@ class Productos extends \yii\db\ActiveRecord
     {
         return [
             [['cat_id', 'nombre', 'precio', 'imagen', 'descripcion'], 'required'],
-            [['cat_id', 'precio', 'IVA', 'stock', 'disponible'], 'integer'],
+            [['cat_id', 'IVA', 'stock', 'disponible', 'estado'], 'integer'],
             [['nombre', 'imagen', 'descripcion'], 'string'],
-            [['cat_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductosCategoria::className(), 'targetAttribute' => ['cat_id' => 'id']],
+            [['precio'], 'number'],
+            [['cat_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductosCategoria::class, 'targetAttribute' => ['cat_id' => 'id']],
         ];
     }
 
@@ -58,6 +60,7 @@ class Productos extends \yii\db\ActiveRecord
             'descripcion' => Yii::t('app', 'Descripcion'),
             'stock' => Yii::t('app', 'Stock'),
             'disponible' => Yii::t('app', 'Disponible'),
+            'estado' => Yii::t('app', 'Estado'),
         ];
     }
 
@@ -68,7 +71,7 @@ class Productos extends \yii\db\ActiveRecord
      */
     public function getCat()
     {
-        return $this->hasOne(ProductosCategoria::className(), ['id' => 'cat_id']);
+        return $this->hasOne(ProductosCategoria::class, ['id' => 'cat_id']);
     }
 
     /**
@@ -78,6 +81,6 @@ class Productos extends \yii\db\ActiveRecord
      */
     public function getProductosFacturas()
     {
-        return $this->hasMany(ProductosFactura::className(), ['id_producto' => 'id']);
+        return $this->hasMany(ProductosFactura::class, ['id_producto' => 'id']);
     }
 }

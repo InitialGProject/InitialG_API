@@ -15,6 +15,8 @@ return  [
             'categorias',
             'productoscategoria',
             'productos',
+            'productosfacturacion',
+            'productosfactura',
             'chat',
             'chatuser',
             'useruser',

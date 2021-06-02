@@ -3,9 +3,9 @@
 return [
     'class' => 'yii\db\Connection',
     //Local
-    //'dsn' => 'mysql:host=alum3.iesfsl.org;dbname=initialg',
+    'dsn' => 'mysql:host=alum3.iesfsl.org;dbname=initialg',
     //Servidor
-    'dsn' => 'mysql:host=localhost;dbname=initialg',
+    //'dsn' => 'mysql:host=localhost;dbname=initialg',
     'username' => 'rooto',
     'password' => 'madj',
     'charset' => 'utf8',
