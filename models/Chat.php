@@ -58,7 +58,17 @@ class Chat extends \yii\db\ActiveRecord
      */
     public function getChatUser()
     {
-        return $this->hasOne(ChatUser::className(), ['chat_id' => 'id']);
+        return $this->hasMany(ChatUser::className(), ['chat_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Usuario]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasMany(ChatUser::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -71,27 +81,8 @@ class Chat extends \yii\db\ActiveRecord
         return $this->hasMany(Mensaje::className(), ['chat_id' => 'id']);
     }
 
-    // public function getUser()
-    // {
-    //     return $this->hasOne(ChatUser::className(), ['user_id' => 'id']);
-    // $user = $this->user->nombre;
-    // return $user;
-    // }
-
-    // public function getNombre()
-    // {
-    //     $nombre = $this->user->nombre;
-    //     return $nombre;
-    // }
-
-    // public function getAvatar()
-    // {
-    //     $avatar = $this->user->avatar;
-    //     return $avatar;
-    // }
-
     public function fields()
     {
-        return array_merge(parent::fields(), ['mensaje']);
+        return array_merge(parent::fields(), ['user', 'mensaje']);
     }
 }

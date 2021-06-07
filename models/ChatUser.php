@@ -44,8 +44,8 @@ class ChatUser extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'user_id' => Yii::t('app', 'User ID'),
             'chat_id' => Yii::t('app', 'Chat ID'),
+            'user_id' => Yii::t('app', 'User ID'),
         ];
     }
 
@@ -70,37 +70,37 @@ class ChatUser extends \yii\db\ActiveRecord
     }
 
     // Datos necesarios del chat
-    // public function getNombreChat()
-    // {
-    //     $name = $this->chatId->name;
-    //     return $name;
-    // }
-    // public function getAvatarChat()
-    // {
-    //     $avatar = $this->chat->avatar;
-    //     return $avatar;
-    // }
-    // public function getDateChat()
-    // {
-    //     $cdate = $this->chat->cdate;
-    //     return $cdate;
-    // }
+    public function getNombre()
+    {
+        $name = $this->chat->name;
+        return $name;
+    }
+    public function getAvatar()
+    {
+        $avatar = $this->chat->avatar;
+        return $avatar;
+    }
+    public function getFecha_creacion()
+    {
+        $cdate = $this->chat->cdate;
+        return $cdate;
+    }
 
     // Datos necesarios del usuario
-    // public function getNombre()
+    // public function getNombre_usuario()
     // {
     //     $nombre = $this->user->nombre;
     //     return $nombre;
     // }
 
-    // public function getAvatar()
+    // public function getAvatarU()
     // {
     //     $avatar = $this->user->avatar;
     //     return $avatar;
     // }
-    // 'nombre', 'avatar'
-    // public function fields()
-    // {
-    //     return array_merge(parent::fields(), ['name', 'avatar', 'date']);
-    // }
+
+    public function fields()
+    {
+        return array_merge(parent::fields(), ['nombre', 'avatar', 'fecha_creacion']);
+    }
 }

@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 /**
- * ChatController implements the CRUD actions for Mensaje model.
+ * MensajeController implements the CRUD actions for Mensaje model.
  */
 class MensajeController extends ApiController
 {

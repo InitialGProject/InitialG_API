@@ -33,7 +33,6 @@ class UserUser extends \yii\db\ActiveRecord
             // [['user_id'], 'unique'],
             // [['added_user'], 'unique'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['user_id' => 'id']],
-
             [['added_user'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['added_user' => 'id']],
         ];
     }

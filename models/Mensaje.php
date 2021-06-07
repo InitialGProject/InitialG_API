@@ -36,8 +36,6 @@ class Mensaje extends \yii\db\ActiveRecord
             [['chat_id', 'sender_id'], 'integer'],
             [['message'], 'string'],
             [['mdate'], 'safe'],
-            [['chat_id'], 'unique'],
-            [['sender_id'], 'unique'],
             [['chat_id'], 'exist', 'skipOnError' => true, 'targetClass' => Chat::className(), 'targetAttribute' => ['chat_id' => 'id']],
             [['sender_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['sender_id' => 'id']],
         ];
