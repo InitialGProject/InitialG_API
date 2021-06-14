@@ -33,10 +33,10 @@ class ProductosFacturacion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_usuario','total', 'direccion', 'pais', 'cp', 'provincia'], 'required'],
+            [['id_usuario','total', 'direccion', 'pais', 'cp', 'provincia', 'total_si'], 'required'],
             [['id_usuario', 'enviado', 'cp'], 'integer'],
             [['fecha_compra', 'fecha_envio'], 'safe'],
-            [['total'], 'number'],
+            [['total', 'total_si'], 'number'],
             [['direccion', 'pais', 'provincia'], 'string'],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['id_usuario' => 'id']],
         ];
@@ -57,6 +57,7 @@ class ProductosFacturacion extends \yii\db\ActiveRecord
             'cp' => Yii::t('app', 'CP'),
             'fecha_envio' => Yii::t('app', 'Fecha Envio'),
             'total' => Yii::t('app', 'Total'),
+            'total_si' => Yii::t('app', 'Total Sin IVA'),
         ];
     }
 
