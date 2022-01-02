@@ -9,14 +9,21 @@ use Yii;
  *
  * @property int $id
  * @property int $id_usuario
- * @property string $fecha_compra
+ * @property string|null $fecha_compra
+ * @property string $direccion
+ * @property string $pais
+ * @property int $cp
+ * @property string $provincia
  * @property int $enviado
  * @property string|null $fecha_envio
+ * @property float|null $total_si
  * @property float|null $total
+ * @property string|null $facturaPP
  *
  * @property ProductosFactura[] $productosFacturas
  * @property Usuarios $usuario
  */
+
 class ProductosFacturacion extends \yii\db\ActiveRecord
 {
     /**
@@ -33,11 +40,11 @@ class ProductosFacturacion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_usuario','total', 'direccion', 'pais', 'cp', 'provincia', 'total_si'], 'required'],
+            [['id_usuario','total', 'direccion', 'pais', 'cp', 'provincia', 'total_si', 'facturaPP'], 'required'],
             [['id_usuario', 'enviado', 'cp'], 'integer'],
             [['fecha_compra', 'fecha_envio'], 'safe'],
             [['total', 'total_si'], 'number'],
-            [['direccion', 'pais', 'provincia'], 'string'],
+            [['direccion', 'pais', 'provincia', 'facturaPP'], 'string'],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['id_usuario' => 'id']],
         ];
     }
@@ -58,6 +65,7 @@ class ProductosFacturacion extends \yii\db\ActiveRecord
             'fecha_envio' => Yii::t('app', 'Fecha Envio'),
             'total' => Yii::t('app', 'Total'),
             'total_si' => Yii::t('app', 'Total Sin IVA'),
+            'facturaPP' => Yii::t('app', 'Factura Pp'),
         ];
     }
 
