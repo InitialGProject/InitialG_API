@@ -44,7 +44,7 @@ class ProductosFacturacion extends \yii\db\ActiveRecord
             [['id_usuario', 'enviado', 'cp'], 'integer'],
             [['fecha_compra', 'fecha_envio'], 'safe'],
             [['total', 'total_si'], 'number'],
-            [['direccion', 'pais', 'provincia', 'facturaPP'], 'string'],
+            [['direccion', 'pais', 'provincia', 'facturaPP', 'nombre_compra', 'email_compra', 'telefono_compra'], 'string'],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['id_usuario' => 'id']],
         ];
     }
@@ -57,6 +57,9 @@ class ProductosFacturacion extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'id_usuario' => Yii::t('app', 'Id Usuario'),
+            'nombre_compra' => Yii::t('app', 'Nombre Usuario'),
+            'email_compra' => Yii::t('app', 'Email Usuario'),
+            'telefono_compra' => Yii::t('app', 'Telefono Usuario'),
             'fecha_compra' => Yii::t('app', 'Fecha Compra'),
             'enviado' => Yii::t('app', 'Enviado'),
             'direccion' => Yii::t('app', 'Direccion'),
