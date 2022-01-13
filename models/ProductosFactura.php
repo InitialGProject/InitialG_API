@@ -33,7 +33,9 @@ class ProductosFactura extends \yii\db\ActiveRecord
         return [
             [['id_facturacion', 'id_producto', 'cantidad', 'conIVA', 'sinIVA'], 'required'],
             [['id_facturacion', 'id_producto', 'cantidad'], 'integer'],
-            [['conIVA', 'sinIVA'], 'number'],
+            [['conIVA', 'sinIVA', 'IVA', 'unidad'], 'number'],
+            [['nombre'], 'string'],
+            [['IVA'], 'default', 'value' => '12'],
             [['id_facturacion'], 'exist', 'skipOnError' => true, 'targetClass' => ProductosFacturacion::class, 'targetAttribute' => ['id_facturacion' => 'id']],
             [['id_producto'], 'exist', 'skipOnError' => true, 'targetClass' => Productos::class, 'targetAttribute' => ['id_producto' => 'id']],
         ];
